@@ -34,6 +34,29 @@
             border-radius: 15px;
             box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
         }
+		.carousel-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Adjust spacing between carousels */
+    flex-wrap: wrap; /* Ensures responsiveness on smaller screens */
+}
+
+.carousel-section {
+    width: 45%; /* Adjust width to fit side by side */
+    max-width: 400px; /* Prevents them from becoming too wide */
+    text-align: center;
+}
+
+@media (max-width: 800px) {
+    .carousel-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .carousel-section {
+        width: 100%;
+    }
+}
+		
         .carousel {
             position: relative;
             max-width: 100%;
@@ -43,9 +66,7 @@
 		width: 80%; /* Adjust this value to make the image smaller */
 		max-width: 500px; /* Ensures images don't get too large */
 		height: auto; /* Maintains aspect ratio */
-		display: flex;
-		justify-content: center;
-            	align-items: center;
+		display: none;
 	}
         .carousel img.active {
             display: block;
@@ -77,18 +98,38 @@
             <li>😊 A slight curve in the leash (like a smile) promotes loose-leash walking.</li>
             <li>🐾 Encourages natural movement, better communication, and relaxation.</li>
         </ul>
-	<p><strong>Walker’s Perspective:</strong> This carousel shows the smiley curve from the person walking the dog.</p>
+    </div>
+
+    	<p><strong>Walker’s Perspective:</strong> This carousel shows the smiley curve from the person walking the dog.</p>
+<div class="carousel-container">
+    <div class="carousel-section">
+        <h3>Walker's Point of View</h3>
         <div class="carousel" id="carousel1">
             <img src="myView0.jpg" class="active" alt="Walker View 1">
             <img src="myView1.jpg" alt="Walker View 2">
-	    <img src="myView2.jpg" alt="Walker View 3">
-	    <img src="myView3.jpg" alt="Walker View 4">
+            <img src="myView2.jpg" alt="Walker View 3">
+            <img src="myView3.jpg" alt="Walker View 4">
             <div class="carousel-controls">
                 <button onclick="prevSlide('carousel1')">❮</button>
                 <button onclick="nextSlide('carousel1')">❯</button>
             </div>
         </div>
     </div>
+
+    <div class="carousel-section">
+        <h3>Other’s Point of View</h3>
+        <div class="carousel" id="carousel2">
+            <img src="othersView0.jpg" class="active" alt="Other View 1">
+            <img src="othersView1.jpg" alt="Other View 2">
+            <img src="othersView2.jpg" alt="Other View 3">
+            <div class="carousel-controls">
+                <button onclick="prevSlide('carousel2')">❮</button>
+                <button onclick="nextSlide('carousel2')">❯</button>
+            </div>
+        </div>
+    </div>
+</div>
+
     
     <div class="section">
         <h2>How to Do It?</h2>
