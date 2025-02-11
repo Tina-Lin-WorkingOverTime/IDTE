@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Smiley Curve</title>
     <style>
-    @import url('https://cdnjs.cloudflare.com/ajax/libs/hack-font/3.3.0/web/hack.min.css');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/hack-font/3.3.0/web/hack.min.css');
+        
         body {
             font-family: 'Hack', sans-serif;
             background: linear-gradient(to bottom, #f8f8f8, #e0eaff);
@@ -33,28 +34,32 @@
             border-radius: 15px;
             box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.1);
         }
-        .image-slot {
-            display: flex;
-            justify-content: center;
-            width: 100%;
+        .carousel {
+            position: relative;
+            max-width: 100%;
             overflow: hidden;
-            gap: 10px;
+        }
+        .carousel img {
+            width: 100%;
+            display: none;
+        }
+        .carousel img.active {
+            display: block;
+        }
+        .carousel-controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-controls button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
             padding: 10px;
-        }
-        .image-slot img {
-            max-width: 45%;
-            height: auto;
-            border-radius: 10px;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        ul li {
-            background: #ffccff;
-            margin: 5px 0;
-            padding: 10px;
-            border-radius: 10px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -68,9 +73,13 @@
             <li>😊 A slight curve in the leash (like a smile) promotes loose-leash walking.</li>
             <li>🐾 Encourages natural movement, better communication, and relaxation.</li>
         </ul>
-        <div class="image-slot">
-            <img src="smile.png" alt="Straight Leash">
-            <img src="smile_2.0.png" alt="Smiley Leash">
+        <div class="carousel" id="carousel1">
+            <img src="smile.png" class="active" alt="Walker View 1">
+            <img src="smile_2.0.png" alt="Walker View 2">
+            <div class="carousel-controls">
+                <button onclick="prevSlide('carousel1')">❮</button>
+                <button onclick="nextSlide('carousel1')">❯</button>
+            </div>
         </div>
     </div>
     
@@ -82,36 +91,42 @@
             <li>3️⃣ Adjust your pace – Walk naturally, rewarding loose leash behavior.</li>
             <li>4️⃣ Stay engaged – Watch your dog’s signals and adjust as needed.</li>
         </ul>
-        <div class="image-slot">
-            <img src="your-image2.jpg" alt="Step-by-step leash curve illustration">
-        </div>
     </div>
     
-    <div class="section">
-        <h2>Benefits for Dogs & Owners</h2>
-        <ul>
-            <li>🐶 <strong>For Dogs:</strong></li>
-            <li>✔ Reduces pulling & frustration</li>
-            <li>✔ Encourages sniffing & exploration</li>
-            <li>✔ Builds confidence & relaxation</li>
-            <li>👩‍🦰 <strong>For Owners:</strong></li>
-            <li>✔ Less arm strain & frustration</li>
-            <li>✔ Strengthens dog-human bond</li>
-            <li>✔ Turns walks into enjoyable experiences</li>
-        </ul>
-        <div class="image-slot">
-            <img src="your-image3.jpg" alt="Happy dog & owner walking">
-        </div>
-    </div>
-    
-    <div class="section">
-        <h2>Things to Watch for When Practicing</h2>
-        <ul>
-            <li>🚫 Avoid sudden leash tightening – This confuses the dog.</li>
-            <li>🐾 Stay consistent – Dogs learn through repetition.</li>
-            <li>🎮 Don’t rush – Some dogs need time to adjust.</li>
-            <li>👀 Watch for distractions – Gradually introduce busier areas.</li>
-        </ul>
-    </div>
+    <script>
+        function nextSlide(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const images = carousel.getElementsByTagName('img');
+            let currentIndex = 0;
+            
+            for (let i = 0; i < images.length; i++) {
+                if (images[i].classList.contains('active')) {
+                    images[i].classList.remove('active');
+                    currentIndex = i;
+                    break;
+                }
+            }
+            
+            const nextIndex = (currentIndex + 1) % images.length;
+            images[nextIndex].classList.add('active');
+        }
+        
+        function prevSlide(carouselId) {
+            const carousel = document.getElementById(carouselId);
+            const images = carousel.getElementsByTagName('img');
+            let currentIndex = 0;
+            
+            for (let i = 0; i < images.length; i++) {
+                if (images[i].classList.contains('active')) {
+                    images[i].classList.remove('active');
+                    currentIndex = i;
+                    break;
+                }
+            }
+            
+            const prevIndex = (currentIndex - 1 + images.length) % images.length;
+            images[prevIndex].classList.add('active');
+        }
+    </script>
 </body>
 </html>
